@@ -5,8 +5,6 @@ var timeApart;
 var minutesToNextTrain;
 var nextTrain;
 
-
-
 // Initialize firebase
 var config = {
     apiKey: "AIzaSyBfr1SriEeMIPpSYZbTxvth-M_DsAozgDc",
@@ -19,7 +17,6 @@ var config = {
   firebase.initializeApp(config);
 
   var database = firebase.database();
-  // console.log(database);
 
 // On submittion add train information
 $("#add-train-btn").on("click", function(event) {
@@ -47,21 +44,16 @@ $("#add-train-btn").on("click", function(event) {
   $("#destinationInput").val("");
   $("#firstTrainInput").val("");
   $("#frequencyInput").val("");
-
-  
 });
 
 // firebase event to add new train
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
-
-  console.log(childSnapshot.val());
 
   // Store everything into a variable.
   var trainName = childSnapshot.val().trainName;
   var destination = childSnapshot.val().destination;
   var firstTrain = childSnapshot.val().firstTrain;
   var frequency = childSnapshot.val().frequency;
-
 
 // Time calculations
   trainFrequency=frequency;
@@ -84,13 +76,6 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
   // next train
   nextTrain=moment().add(minutesToNextTrain, "minutes");
-
-  console.log(trainName);
-  console.log(destination);
-  console.log(firstTrain);
-  console.log(frequency);
-  console.log(moment(nextTrain).format("hh:mm"));
-  console.log(minutesToNextTrain);
 
   // Add each train's data into the table
   $("#scheduleList").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" +

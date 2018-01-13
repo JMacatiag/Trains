@@ -1,3 +1,6 @@
+body{
+	background-color:grey;
+}
 .panel{
 	background-color: black;
 	color: white;
@@ -9,4 +12,8 @@
 
 .panelBody{
 	margin-bottom: 20px;
+}
+
+.form-control{
+	width: 95%;
 }
